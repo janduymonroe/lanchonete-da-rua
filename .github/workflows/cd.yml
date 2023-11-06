@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - workflow/cicd-api
+      - database
 
 jobs:
   deploy:
