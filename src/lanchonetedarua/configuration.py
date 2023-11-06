@@ -4,7 +4,7 @@ class Config(object):
     DEBUG = True
     TESTING = False
     
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI')
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
 
     # Silence the deprecation warning
     SQLALCHEMY_TRACK_MODIFICATIONS = False
