@@ -22,11 +22,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
 
-      - name: Build Docker image
-        run: |
-          docker build -t lanchonete-da-rua-api:latest .
-        env:
-          AWS_DEFAULT_REGION: us-east-2
+    #  - name: Build Docker image
+    #    run: |
+    #      docker build -t lanchonete-da-rua-api:latest .
+    #    env:
+    #      AWS_DEFAULT_REGION: us-east-2
 
       - name: Apply Migrations
         working-directory: src/lanchonetedarua/adapters/database/migrations
@@ -34,22 +34,22 @@ jobs:
           pip install alembic sqlalchemy psycopg2
           alembic upgrade head
         env:
-          DATABASE_URI: ${{ secrets.DATABASE_URI }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
           AWS_RDS_USER: ${{ secrets.AWS_RDS_USER }}
           AWS_RDS_PASSWORD: ${{ secrets.AWS_RDS_PASSWORD }}
 
-      - name: Push Docker image to ECR
-        run: |
-          # Login ECR
-          aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 990304834518.dkr.ecr.us-east-2.amazonaws.com
-          
-          # Image tag
-          docker tag lanchonete-da-rua-api:latest 990304834518.dkr.ecr.us-east-2.amazonaws.com/lanchonete-da-rua:lanchonete-da-rua-api-latest
-          
-          # Publish image to ecr
-          docker push 990304834518.dkr.ecr.us-east-2.amazonaws.com/lanchonete-da-rua:lanchonete-da-rua-api-latest
-        env:
-          AWS_DEFAULT_REGION: us-east-2
+    #  - name: Push Docker image to ECR
+    #    run: |
+    #      # Login ECR
+    #      aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 990304834518.dkr.ecr.us-east-2.amazonaws.com
+    #      
+    #      # Image tag
+    #      docker tag lanchonete-da-rua-api:latest 990304834518.dkr.ecr.us-east-2.amazonaws.com/lanchonete-da-rua:lanchonete-da-rua-api-latest
+    #      
+    #      # Publish image to ecr
+    #      docker push 990304834518.dkr.ecr.us-east-2.amazonaws.com/lanchonete-da-rua:lanchonete-da-rua-api-latest
+    #    env:
+    #      AWS_DEFAULT_REGION: us-east-2
 
       - name: Deploy to ECS
         run: |
