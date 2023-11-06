@@ -31,7 +31,7 @@ jobs:
       - name: Apply Migrations
         working-directory: src/lanchonetedarua/adapters/database/migrations
         run: |
-          pip install alembic sqlalchemy
+          pip install alembic sqlalchemy psycopg2
           alembic upgrade head
         env:
           DATABASE_URI: ${{ secrets.DATABASE_URI }}
