@@ -8,6 +8,10 @@ from alembic import context
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
+section = config.config_ini_section
+config.set_section_option(section, "AWS_RDS_USER", os.environ.get("AWS_RDS_USER"))
+config.set_section_option(section, "AWS_RDS_PASSWORD", os.environ.get("AWS_RDS_PASSWORD"))
+config.set_section_option(section, "DATABASE_URL", os.environ.get("DATABASE_URL"))
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
