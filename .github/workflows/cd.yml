@@ -34,7 +34,7 @@ jobs:
           pip install alembic sqlalchemy
           alembic upgrade head
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_URI: ${{ secrets.DATABASE_URI }}
           AWS_RDS_USER: ${{ secrets.AWS_RDS_USER }}
           AWS_RDS_PASSWORD: ${{ secrets.AWS_RDS_PASSWORD }}
 
